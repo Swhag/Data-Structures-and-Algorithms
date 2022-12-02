@@ -2,7 +2,7 @@
 
 Data Structures: LinkedList
 
-• append(value) adds a new node containing value to the end of the list
+• <sub>append(value)</sub> adds a new node containing value to the end of the list
 
 • prepend(value) adds a new node containing value to the start of the list
 
