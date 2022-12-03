@@ -1,6 +1,6 @@
 class Node {
-  constructor(data) {
-    this.data = data;
+  constructor(value) {
+    this.value = value;
     this.nextNode = null;
   }
 }
@@ -11,19 +11,19 @@ export default class LinkedList {
     this.size = 0;
   }
 
-  prepend(data) {
-    const newNode = new Node(data);
+  prepend(value) {
+    const newNode = new Node(value);
 
     newNode.nextNode = this.head;
     this.head = newNode;
     this.size++;
   }
 
-  append(data) {
-    const newNode = new Node(data);
+  append(value) {
+    const newNode = new Node(value);
     let current = this.head;
 
-    if (current === null) this.prepend(data);
+    if (current === null) this.prepend(value);
     else {
       while (current.nextNode !== null) {
         current = current.nextNode;
@@ -75,21 +75,21 @@ export default class LinkedList {
     this.size--;
   }
 
-  contains(data) {
+  contains(value) {
     let current = this.head;
 
-    while (current != null && current.data !== data) {
+    while (current != null && current.value !== value) {
       current = current.nextNode;
     }
     return current == null ? false : true;
   }
 
-  find(data) {
+  find(value) {
     let current = this.head;
     let index = 0;
 
     while (current != null) {
-      if (current.data == data) return index;
+      if (current.value == value) return index;
       index++;
       current = current.nextNode;
     }
@@ -101,16 +101,16 @@ export default class LinkedList {
     let output = '';
     let current = this.head;
     while (current) {
-      output = `${output}(${current.data}) -> `;
+      output = `${output}(${current.value}) -> `;
       current = current.nextNode;
     }
     console.log(`${output}null`);
   }
 
-  insertAt(data, index) {
-    const newNode = new Node(data);
+  insertAt(value, index) {
+    const newNode = new Node(value);
 
-    if (index === 0) return this.prepend(data);
+    if (index === 0) return this.prepend(value);
 
     const prev = this.at(index - 1);
     if (prev == null) return null;
