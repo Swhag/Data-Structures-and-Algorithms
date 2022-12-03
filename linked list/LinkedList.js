@@ -1,7 +1,7 @@
 class Node {
-  constructor(value, next) {
-    this.value = value;
-    this.nextNode = next;
+  constructor(data) {
+    this.data = data;
+    this.nextNode = null;
   }
 }
 
@@ -12,7 +12,9 @@ export default class LinkedList {
   }
 
   prepend(data) {
-    const newNode = new Node(data, this.head);
+    const newNode = new Node(data);
+
+    newNode.nextNode = this.head;
     this.head = newNode;
     this.size++;
   }
@@ -31,6 +33,23 @@ export default class LinkedList {
     this.size++;
   }
 
+  getSize() {
+    return this.size;
+  }
+
+  getHead() {
+    return this.head;
+  }
+
+  getTail() {
+    let current = this.head;
+
+    while (current.nextNode) {
+      current = current.nextNode;
+    }
+    return current;
+  }
+
   at(index) {
     if (index < 0 || index >= this.size) return null;
 
@@ -41,13 +60,73 @@ export default class LinkedList {
     return current;
   }
 
+  removeFirst() {
+    this.head = this.head.nextNode;
+    this.size--;
+  }
+
+  pop() {
+    let current = this.head;
+
+    while (current.nextNode.nextNode != null) {
+      current = current.nextNode;
+    }
+    current.nextNode = null;
+    this.size--;
+  }
+
+  contains(data) {
+    let current = this.head;
+
+    while (current != null && current.data !== data) {
+      current = current.nextNode;
+    }
+    return current == null ? false : true;
+  }
+
+  find(data) {
+    let current = this.head;
+    let index = 0;
+
+    while (current != null) {
+      if (current.data == data) return index;
+      index++;
+      current = current.nextNode;
+    }
+
+    return null;
+  }
+
   toString() {
     let output = '';
     let current = this.head;
     while (current) {
-      output = `${output}(${current.value}) -> `;
+      output = `${output}(${current.data}) -> `;
       current = current.nextNode;
     }
     console.log(`${output}null`);
+  }
+
+  insertAt(data, index) {
+    const newNode = new Node(data);
+
+    if (index === 0) return this.prepend(data);
+
+    const prev = this.at(index - 1);
+    if (prev == null) return null;
+
+    newNode.nextNode = prev.nextNode;
+    prev.nextNode = newNode;
+    this.size++;
+  }
+
+  removeAt(index) {
+    if (index === 0) return this.removeFirst();
+
+    const prev = this.at(index - 1);
+    if (prev == null) return null;
+
+    prev.nextNode = prev.nextNode.nextNode;
+    this.size--;
   }
 }
