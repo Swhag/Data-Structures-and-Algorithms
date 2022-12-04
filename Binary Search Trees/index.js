@@ -8,7 +8,7 @@ let testArray3 = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const bst = new BinaryTree(testArray2);
 
 bst.insert(15);
-// bst.delete(9);
+// bst.delete(15);
 printTree(bst.root);
 
 // console.log(bst.levelOrder());

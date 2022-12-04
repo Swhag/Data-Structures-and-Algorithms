@@ -26,7 +26,8 @@ export default class BinaryTree {
 
   insert(value, root = this.root) {
     if (root === null) return new Node(value);
-    if (root.value === value) return;
+    // Checks if value exists to prevent duplicate insert
+    if (root.value === value) return root;
 
     if (value < root.value) {
       root.left = this.insert(value, root.left);
