@@ -136,18 +136,20 @@ export default class BinaryTree {
     return this.find(value, root.right);
   }
 
-  levelOrder(root = this.root) {
-    const queue = [root];
-    const result = [];
+  levelOrder(result = [], queue = [], root = this.root) {
+    if (root === null) return;
 
-    if (root == null) return;
+    result.push(root.value);
 
-    while (queue.length > 0) {
-      let current = queue.shift(root);
-      result.push(root.value);
+    // Add root's left and right children to queue
+    queue.push(root.left);
+    queue.push(root.right);
 
-      if (current.left !== null) queue.push(current.left);
-      if (current.right !== null) queue.push(current.right);
+    // Move to next level
+    while (queue.length) {
+      const level = queue[0];
+      queue.shift();
+      this.levelOrder(result, queue, level);
     }
 
     return result;
