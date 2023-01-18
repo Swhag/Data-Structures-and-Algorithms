@@ -30,3 +30,4 @@
 - `isBalanced()` - returns true/false based on whether or not the tree is balanced
 - `rebalance()` - rebalances the tree
 - `printTree` - prints the tree in the console in a human reader friendly format
+
